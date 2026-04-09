@@ -1,5 +1,5 @@
 ---
-title: Blacksitescaler
+title: imgscaler
 emoji: 📊
 colorFrom: yellow
 colorTo: red

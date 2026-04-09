@@ -2,6 +2,7 @@ import gradio as gr
 from PIL import Image
 import os
 
+# ====================== MODERN ALL-BLACK + PURPLE THEME ======================
 css = """
 body, .gradio-container { background: #0a0a0a !important; color: #ffffff !important; font-family: 'Inter', system-ui, sans-serif; }
 .gradio-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
@@ -13,14 +14,24 @@ h2 { color: #aaaaaa; text-align: center; font-weight: 400; margin-bottom: 30px; 
 .output-image { border-radius: 16px; border: 1px solid #222; }
 """
 
+# ====================== FUNCTIONS ======================
 def upscale_image(image, mode):
     if image is None:
         return None
     return image
 
+# ====================== INTERFACE ======================
 with gr.Blocks(css=css, title="blacksite scaler") as demo:
-    # 🔥 RICHADS PUSH SCRIPT
-    gr.HTML('''<script type="module" src="https://richinfo.co/richpartners/push/js/rp-cl-ob.js?pubid=1007787&siteid=393464&niche=33" async data-cfasync="false"></script>''')
+    
+    # 🔥 HILLTOPADS DIRECT URL POPUNDER (triggers on button clicks)
+    gr.HTML('''
+    <script>
+        const HILLTOP_URL = "https://bony-teaching.com/bU3kV.0CPL3vppvxbBmIVoJCZaDP0y2/ORTwQdyPNRTKIP1OLNTGYi5WNYDqI/1TMQjokA";
+        function triggerPopunder() {
+            window.open(HILLTOP_URL, "_blank");
+        }
+    </script>
+    ''')
     
     gr.Markdown("# BLACKSITE SCALER")
     gr.Markdown("## Dual-Mode AI Image Upscaler")
@@ -29,6 +40,7 @@ with gr.Blocks(css=css, title="blacksite scaler") as demo:
         with gr.Column(scale=1):
             gr.Markdown("### Standard Upscale (×4)")
             btn_standard = gr.Button("4× UPSCALE", size="large", elem_classes=["button"])
+        
         with gr.Column(scale=1):
             gr.Markdown("### Premium Upscale (×8) ✨")
             btn_premium = gr.Button("8× UPSCALE", size="large", elem_classes=["button"])
@@ -39,10 +51,30 @@ with gr.Blocks(css=css, title="blacksite scaler") as demo:
         with gr.Column():
             output_image = gr.Image(label="Upscaled Result", height=500, elem_classes=["output-image"])
     
-    gr.Markdown('<div style="text-align: center; margin-top: 20px; padding: 10px; opacity: 0.65;"><p style="margin: 0; font-size: 16pt;">created by 6nova / powered by gradio</p></div>')
+    gr.Markdown("""
+    <div style="text-align: center; margin-top: 20px; padding: 10px; opacity: 0.65;">
+        <p style="margin: 0; font-size: 16pt;">created by 6nova / powered by gradio</p>
+    </div>
+    """)
 
-    btn_standard.click(fn=lambda img: upscale_image(img, "4x"), inputs=input_image, outputs=output_image)
-    btn_premium.click(fn=lambda img: upscale_image(img, "8x"), inputs=input_image, outputs=output_image)
+    # Trigger popunder on button clicks
+    btn_standard.click(
+        fn=lambda img: upscale_image(img, "4x"),
+        inputs=input_image,
+        outputs=output_image,
+        js="triggerPopunder"
+    )
+    btn_premium.click(
+        fn=lambda img: upscale_image(img, "8x"),
+        inputs=input_image,
+        outputs=output_image,
+        js="triggerPopunder"
+    )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=int(os.getenv("PORT", 7860)), share=False, show_error=True)
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.getenv("PORT", 7860)),
+        share=False,
+        show_error=True
+    )
